@@ -1,5 +1,6 @@
 package com.gadev;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,14 +32,22 @@ public class RegistroEstudiantes {
             }
         }
 
-
         return Optional.empty();
     }
 
     public List<Estudiante> buscarPorNombre(String nombre) {
         // Validar el nombre
         validarString(nombre, "Nombre");
-        return null;
+
+        List<Estudiante> resultado = new ArrayList<>();
+
+        // Buscar estudiantes por nombre (puede haber varios con el mismo nombre)
+        for(Estudiante e : estudiantes){
+            if (e.getNombre().equals(nombre.trim()))
+                resultado.add(e);
+        }
+
+        return resultado;
     }
 
     public List<Estudiante> listarPorPromedio() {
