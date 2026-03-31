@@ -55,11 +55,18 @@ public class RegistroEstudiantes {
     }
 
     public List<Estudiante> listarPorPromedio() {
-        return null;
+        List<Estudiante> listaPromedios = List.copyOf(lista);
+
+        return listaPromedios.stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public void estadisticas() {
-
+        System.out.println("Promedio general: ");
+        System.out.println("Estudiante con mejor promedio: ");
+        System.out.println("Cantidad de aprobados: ");
+        System.out.println("Total de estudiantes registrados: " + lista.size());
     }
 
     // Metodo auxiliar para validar String como DNI o Nombre
