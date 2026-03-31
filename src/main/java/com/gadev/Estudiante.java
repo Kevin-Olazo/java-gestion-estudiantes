@@ -9,6 +9,9 @@ public class Estudiante extends Persona implements Comparable<Estudiante> {
 
     public Estudiante(String nombre, String dni, String carrera) {
         super(nombre, dni);
+        if (carrera == null || carrera.isBlank()){
+            throw new IllegalArgumentException("Carrera no puede ser nula o vacía");
+        }
         this.carrera = carrera;
     }
 
