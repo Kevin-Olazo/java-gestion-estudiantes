@@ -1,5 +1,6 @@
 package com.gadev;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Estudiante extends Persona implements Comparable<Estudiante> {
@@ -24,5 +25,33 @@ public class Estudiante extends Persona implements Comparable<Estudiante> {
                 .mapToDouble(Double::doubleValue)// Convertir cada nota a un valor double
                 .average() // Calcular el promedio de las notas
                 .orElse(0.0); // Si no hay notas, retornar 0.0
+    }
+
+    public List<Double> getNotas() {
+        return List.copyOf(notas);
+    }
+
+    public String getCarrera() {
+        return carrera;
+    }
+
+    @Override
+    String getTipoPersona() {
+        return "";
+    }
+
+    @Override
+    public int compareTo(Estudiante o) {
+        return Double.compare(this.getPromedio(), o.getPromedio());
+    }
+
+    @Override
+    public String toString() {
+        return "Estudiante{" +
+                "nombre='" + nombre + '\'' +
+                ", dni='" + dni + '\'' +
+                ", carrera='" + carrera + '\'' +
+                ", notas=" + notas +
+                '}';
     }
 }
