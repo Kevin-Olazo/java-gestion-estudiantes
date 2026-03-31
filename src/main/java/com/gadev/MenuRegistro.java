@@ -4,16 +4,35 @@ import java.util.Scanner;
 
 public class MenuRegistro {
     Scanner scanner = new Scanner(System.in);
+    RegistroEstudiantes registroEstudiantes;
 
     public void start(){
 
-        int command = 0;
+        int command;
 
         do {
             printMenu();
             command = Integer.parseInt(scanner.nextLine());
+            switch (command){
+                case 1 -> registrarNuevo();
+                case 8 -> System.out.println("Adios!");
+                default -> System.out.println("Ingrese un comando valido");
+            }
 
         } while (command != 8);
+
+    }
+
+    public void registrarNuevo(){
+
+        System.out.println("Ingresa nombre: ");
+        String nombre = scanner.nextLine();
+        System.out.println("Ingresa DNI: ");
+        String dni = scanner.nextLine();
+        System.out.println("Ingresa Carrera: ");
+        String carrera = scanner.nextLine();
+
+        registroEstudiantes.registrarEstudiante(new Estudiante(nombre,dni, carrera));
 
     }
 
