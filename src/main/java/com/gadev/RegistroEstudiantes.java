@@ -1,13 +1,11 @@
 package com.gadev;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class RegistroEstudiantes {
-    List<Estudiante> lista;
-    Map<String, Estudiante> porDni;
+    private List<Estudiante> lista = new ArrayList<>();
+    private Map<String, Estudiante> porDni = new HashMap<>();
 
     public void registrarEstudiante(Estudiante estudiante) {
         if (estudiante == null) {
@@ -66,6 +64,14 @@ public class RegistroEstudiantes {
         System.out.println("Estudiante con mejor promedio: ");
         System.out.println("Cantidad de aprobados: ");
         System.out.println("Total de estudiantes registrados: " + lista.size());
+    }
+
+    public List<Estudiante> getLista() {
+        return List.copyOf(lista);
+    }
+
+    public void setLista(List<Estudiante> lista) {
+        this.lista = lista;
     }
 
     // Metodo auxiliar para validar String como DNI o Nombre

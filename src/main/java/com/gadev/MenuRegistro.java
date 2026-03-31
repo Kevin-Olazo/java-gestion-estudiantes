@@ -3,8 +3,8 @@ package com.gadev;
 import java.util.Scanner;
 
 public class MenuRegistro {
-    Scanner scanner = new Scanner(System.in);
-    RegistroEstudiantes registroEstudiantes;
+    private final Scanner scanner = new Scanner(System.in);
+    private RegistroEstudiantes registroEstudiantes = new RegistroEstudiantes();
 
     public void start(){
 
@@ -12,9 +12,11 @@ public class MenuRegistro {
 
         do {
             printMenu();
+            System.out.print("Seleccione una opción: ");
             command = Integer.parseInt(scanner.nextLine());
             switch (command){
                 case 1 -> registrarNuevo();
+                case 6 -> verEstadisticas();
                 case 8 -> System.out.println("Adios!");
                 default -> System.out.println("Ingrese un comando valido");
             }
@@ -33,7 +35,12 @@ public class MenuRegistro {
         String carrera = scanner.nextLine();
 
         registroEstudiantes.registrarEstudiante(new Estudiante(nombre,dni, carrera));
+    }
 
+    public void verEstadisticas(){
+        for(Estudiante e : registroEstudiantes.getLista()){
+            System.out.println(e.toString());
+        }
     }
 
     public void printMenu(){
