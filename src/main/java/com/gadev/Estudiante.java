@@ -40,12 +40,12 @@ public class Estudiante extends Persona implements Comparable<Estudiante> {
 
     @Override
     String getTipoPersona() {
-        return "";
+        return "Estudiante de " + carrera;
     }
 
     @Override
-    public int compareTo(Estudiante o) {
-        return Double.compare(this.getPromedio(), o.getPromedio());
+    public int compareTo(Estudiante other) {
+        return Double.compare(other.getPromedio(), this.getPromedio());
     }
 
     @Override

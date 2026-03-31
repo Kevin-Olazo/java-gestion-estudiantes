@@ -2,23 +2,33 @@ package com.gadev;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class RegistroEstudiantes {
-    List<Estudiante> estudiantes;
+    List<Estudiante> lista;
+    Map<String, Estudiante> porDni;
 
     public void registrarEstudiante(Estudiante estudiante) {
         if (estudiante == null) {
             throw new IllegalArgumentException("Estudiante no puede ser null");
         }
-        estudiantes.add(estudiante);
+
+        if (porDni.containsKey(estudiante.getDni())){
+            throw new IllegalArgumentException("Ya existe un estudiante con DNI: " + estudiante.getDni());
+        }
+
+        lista.add(estudiante);
+        porDni.put(estudiante.getDni(), estudiante);
     }
 
     public void eliminarEstudiante(String dni) {
         // Validar el DNI
         validarString(dni, "Dni");
-
-        estudiantes.removeIf(estudiante -> dni.equals(estudiante.getDni()));
+        Estudiante e = porDni.remove(dni);
+        if (e != null){
+            lista.remove(e);
+        }
     }
 
     public Optional<Estudiante> buscarPorDni(String dni) {
@@ -26,7 +36,7 @@ public class RegistroEstudiantes {
         validarString(dni, "Dni");
 
         // Buscar el estudiante por DNI
-        for (Estudiante estudiante : estudiantes) {
+        for (Estudiante estudiante : lista) {
             if (dni.equals(estudiante.getDni())) {
                 return Optional.of(estudiante);
             }
@@ -42,7 +52,7 @@ public class RegistroEstudiantes {
         List<Estudiante> resultado = new ArrayList<>();
 
         // Buscar estudiantes por nombre (puede haber varios con el mismo nombre)
-        for(Estudiante e : estudiantes){
+        for(Estudiante e : lista){
             if (e.getNombre().equals(nombre.trim()))
                 resultado.add(e);
         }
