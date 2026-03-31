@@ -1,5 +1,6 @@
 package com.gadev;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class MenuRegistro {
@@ -7,6 +8,21 @@ public class MenuRegistro {
     private RegistroEstudiantes registroEstudiantes = new RegistroEstudiantes();
 
     public void start(){
+
+        Estudiante e1 = new Estudiante("Juan Perez", "12345678", "Ingenieria de Sistemas");
+        Estudiante e2 = new Estudiante("Maria Gomez", "87654321", "Administracion");
+        Estudiante e3 = new Estudiante("Carlos Sanchez", "11223344", "Derecho");
+        Estudiante e4 = new Estudiante("Ana Rodriguez", "44332211", "Medicina");
+        Estudiante e5 = new Estudiante("Luis Fernandez", "55667788", "Arquitectura");
+        Estudiante e6 = new Estudiante("Sofia Martinez", "99887766", "Psicologia");
+
+        registroEstudiantes.registrarEstudiante(e1);
+        registroEstudiantes.registrarEstudiante(e2);
+        registroEstudiantes.registrarEstudiante(e3);
+        registroEstudiantes.registrarEstudiante(e4);
+        registroEstudiantes.registrarEstudiante(e5);
+        registroEstudiantes.registrarEstudiante(e6);
+
 
         int command;
 
@@ -16,6 +32,7 @@ public class MenuRegistro {
             command = Integer.parseInt(scanner.nextLine());
             switch (command){
                 case 1 -> registrarNuevo();
+                case 3 -> buscarEstudiante().ifPresentOrElse(e -> System.out.println(e.toString()), () -> System.out.println("No se encontró  estudiante con ese dni"));
                 case 6 -> verEstadisticas();
                 case 8 -> System.out.println("Adios!");
                 default -> System.out.println("Ingrese un comando valido");
@@ -35,6 +52,18 @@ public class MenuRegistro {
         String carrera = scanner.nextLine();
 
         registroEstudiantes.registrarEstudiante(new Estudiante(nombre,dni, carrera));
+    }
+
+    public void agregarNota(double nota){
+
+        buscarEstudiante().ifPresentOrElse(e -> e.agregarNota(nota), () -> System.out.println("No se encontró el estudiante"));
+
+    }
+
+    public Optional<Estudiante> buscarEstudiante(){
+        System.out.print("Ingrese dni del estudiante: ");
+        String dni = scanner.nextLine();
+        return registroEstudiantes.buscarPorDni(dni);
     }
 
     public void verEstadisticas(){
