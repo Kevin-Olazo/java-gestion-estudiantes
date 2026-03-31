@@ -26,6 +26,7 @@ public class RegistroEstudiantes {
     public void eliminarEstudiante(String dni) {
         // Validar el DNI
         validarString(dni, "Dni");
+
         Estudiante e = porDni.remove(dni);
         if (e != null){
             lista.remove(e);
@@ -36,14 +37,7 @@ public class RegistroEstudiantes {
         // Validar el DNI
         validarString(dni, "Dni");
 
-        // Buscar el estudiante por DNI
-        for (Estudiante estudiante : lista) {
-            if (dni.equals(estudiante.getDni())) {
-                return Optional.of(estudiante);
-            }
-        }
-
-        return Optional.empty();
+        return Optional.ofNullable(porDni.get(dni.trim()));
     }
 
     public List<Estudiante> buscarPorNombre(String nombre) {
