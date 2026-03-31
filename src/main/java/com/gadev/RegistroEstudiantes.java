@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class RegistroEstudiantes {
     List<Estudiante> lista;
@@ -49,15 +50,14 @@ public class RegistroEstudiantes {
         // Validar el nombre
         validarString(nombre, "Nombre");
 
-        List<Estudiante> resultado = new ArrayList<>();
+        String busqueda = nombre.trim().toLowerCase();
 
-        // Buscar estudiantes por nombre (puede haber varios con el mismo nombre)
-        for(Estudiante e : lista){
-            if (e.getNombre().equals(nombre.trim()))
-                resultado.add(e);
-        }
+        return lista.stream()
+                .filter(e -> e.getNombre() != null &&
+                        e.getNombre().toLowerCase().contains(busqueda))
+                .collect(Collectors.toList());
 
-        return resultado;
+
     }
 
     public List<Estudiante> listarPorPromedio() {
