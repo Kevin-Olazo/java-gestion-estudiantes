@@ -40,8 +40,8 @@ public class Estudiante extends Persona implements Comparable<Estudiante> {
     }
 
     @Override
-    String getTipoPersona() {
-        return "Estudiante de " + carrera;
+    public String getTipoPersona() {
+        return "Estudiante";
     }
 
     @Override
@@ -51,12 +51,8 @@ public class Estudiante extends Persona implements Comparable<Estudiante> {
 
     @Override
     public String toString() {
-        return "Estudiante{" +
-                "nombre='" + nombre + '\'' +
-                ", dni='" + dni + '\'' +
-                ", carrera='" + carrera + '\'' +
-                ", notas=" + notas +
-                ", promedio=" + getPromedio() +
-                '}';
+        return super.toString() +
+                " | Promedio: " + String.format("%.2f", getPromedio()) +
+                " | Notas: " + notas;
     }
 }
