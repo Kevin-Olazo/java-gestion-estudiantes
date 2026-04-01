@@ -1,6 +1,6 @@
 package com.gadev;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Estudiante extends Persona implements Comparable<Estudiante> {
@@ -13,16 +13,17 @@ public class Estudiante extends Persona implements Comparable<Estudiante> {
             throw new IllegalArgumentException("Carrera no puede ser nula o vacía");
         }
         this.carrera = carrera;
+        this.notas = new ArrayList<>();
     }
 
-    private void agregarNota(double nota){
+    public void agregarNota(double nota){
         if (nota < 0 || nota > 20){
             throw new IllegalArgumentException("Nota invalida (0-20)");
         }
         notas.add(nota);
     }
 
-    private double getPromedio(){
+    public double getPromedio(){
         // Calcular el promedio de las notas
         return notas.stream()// Convertir la lista de notas a un stream
                 .mapToDouble(Double::doubleValue)// Convertir cada nota a un valor double
@@ -55,6 +56,7 @@ public class Estudiante extends Persona implements Comparable<Estudiante> {
                 ", dni='" + dni + '\'' +
                 ", carrera='" + carrera + '\'' +
                 ", notas=" + notas +
+                ", promedio=" + getPromedio() +
                 '}';
     }
 }

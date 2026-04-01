@@ -67,7 +67,8 @@ public class MenuRegistro {
                         buscarEstudiante().ifPresentOrElse(e -> System.out.println(e.toString()), () -> System.out.println("No se encontró  estudiante con ese dni"));
                 case 4 -> buscarNombre();
                 case 5 -> listarPorPromedio();
-                case 6 -> verEstadisticas();
+                case 6 -> registroEstudiantes.estadisticas();
+                case 7 -> eliminarEstudiante();
                 case 8 -> System.out.println("Adios!");
                 default -> System.out.println("Ingrese un comando valido");
             }
@@ -145,11 +146,29 @@ public class MenuRegistro {
         return registroEstudiantes.buscarPorDni(dni);
     }
 
-    private void verEstadisticas() {
-        for (Estudiante e : registroEstudiantes.getLista()) {
-            System.out.println(e.toString());
+    private void eliminarEstudiante(){
+        Optional<Estudiante> estudiante = buscarEstudiante();
+
+        if (estudiante.isEmpty()) {
+            System.out.println("No se encontró el estudiante con ese DNI");
+            return;
         }
+
+        System.out.println("Estas seguro? S/N");
+
+        String confirmation = scanner.nextLine();
+        if (confirmation.trim().equalsIgnoreCase("s")){
+            registroEstudiantes.eliminarEstudiante(estudiante.get().getDni());
+            System.out.println("Estudiante eliminado exitosamente");
+        } else if (confirmation.trim().equalsIgnoreCase("n")) {
+            System.out.println(" - ");
+        } else {
+            System.out.println("Ingrese un valor correcto (S/N)");
+        }
+
+
     }
+
 
     private void printMenu() {
         System.out.println("------- Menu de registro de estudiantes --------");

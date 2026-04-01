@@ -4,8 +4,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class RegistroEstudiantes {
-    private List<Estudiante> lista = new ArrayList<>();
-    private Map<String, Estudiante> porDni = new HashMap<>();
+    private List<Estudiante> lista;
+    private Map<String, Estudiante> porDni;
+
+    public RegistroEstudiantes(){
+        this.lista = new ArrayList<>();
+        this.porDni = new HashMap<>();
+    }
 
     public void registrarEstudiante(Estudiante estudiante) {
         if (estudiante == null) {
@@ -79,9 +84,9 @@ public class RegistroEstudiantes {
                 .filter(e -> e.getPromedio() >= 13)
                 .count();
 
-        System.out.println("Promedio general: ");
-        System.out.println("Estudiante con mejor promedio: ");
-        System.out.println("Cantidad de aprobados: ");
+        System.out.println("Promedio general: " + promedioGeneral);
+        System.out.println("Estudiante con mejor promedio: " + (mejorPromedio != null ? mejorPromedio.getNombre() : "N/A"));
+        System.out.println("Cantidad de aprobados: " + aprobados);
         System.out.println("Total de estudiantes registrados: " + lista.size());
     }
 
