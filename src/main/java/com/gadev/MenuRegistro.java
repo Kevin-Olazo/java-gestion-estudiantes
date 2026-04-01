@@ -1,5 +1,6 @@
 package com.gadev;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -9,12 +10,12 @@ public class MenuRegistro {
 
     public void start() {
 
-        Estudiante e1 = new Estudiante("Juan Perez", "12345678", "Ingenieria de Sistemas");
-        Estudiante e2 = new Estudiante("Maria Gomez", "87654321", "Administracion");
+        Estudiante e1 = new Estudiante("Juan Perez", "12345678", "Ingeniería de Sistemas");
+        Estudiante e2 = new Estudiante("Maria Gomez", "87654321", "Administración");
         Estudiante e3 = new Estudiante("Carlos Sanchez", "11223344", "Derecho");
         Estudiante e4 = new Estudiante("Ana Rodriguez", "44332211", "Medicina");
         Estudiante e5 = new Estudiante("Luis Fernandez", "55667788", "Arquitectura");
-        Estudiante e6 = new Estudiante("Sofia Martinez", "99887766", "Psicologia");
+        Estudiante e6 = new Estudiante("Sofia Martinez", "99887766", "Psicología");
 
         registroEstudiantes.registrarEstudiante(e1);
         registroEstudiantes.registrarEstudiante(e2);
@@ -22,7 +23,6 @@ public class MenuRegistro {
         registroEstudiantes.registrarEstudiante(e4);
         registroEstudiantes.registrarEstudiante(e5);
         registroEstudiantes.registrarEstudiante(e6);
-
 
         int command;
 
@@ -35,6 +35,7 @@ public class MenuRegistro {
                 case 2 -> agregarNota();
                 case 3 ->
                         buscarEstudiante().ifPresentOrElse(e -> System.out.println(e.toString()), () -> System.out.println("No se encontró  estudiante con ese dni"));
+                case 4 -> buscarNombre();
                 case 6 -> verEstadisticas();
                 case 8 -> System.out.println("Adios!");
                 default -> System.out.println("Ingrese un comando valido");
@@ -56,11 +57,27 @@ public class MenuRegistro {
         registroEstudiantes.registrarEstudiante(new Estudiante(nombre, dni, carrera));
     }
 
+    public void buscarNombre(){
+        System.out.print("Ingrese nombre: ");
+        String nombre = scanner.nextLine();
+        List<Estudiante> resultado = registroEstudiantes.buscarPorNombre(nombre);
+
+        if (resultado.isEmpty()){
+            System.out.println("No se encontraron resultados.");
+        } else {
+            for(Estudiante e : resultado){
+                System.out.println(e.toString());
+            }
+            System.out.println("Total de resultados: " + resultado.size());
+        }
+
+    }
+
     public void agregarNota() {
         Optional<Estudiante> estudiante = buscarEstudiante();
 
         if (estudiante.isEmpty()) {
-            System.out.println("No se encontro el estudiante con ese DNI");
+            System.out.println("No se encontró el estudiante con ese DNI");
             return;
         }
 
