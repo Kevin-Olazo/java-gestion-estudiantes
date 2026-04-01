@@ -16,6 +16,12 @@ public class MenuRegistro {
         Estudiante e4 = new Estudiante("Ana Rodriguez", "44332211", "Medicina");
         Estudiante e5 = new Estudiante("Luis Fernandez", "55667788", "Arquitectura");
         Estudiante e6 = new Estudiante("Sofia Martinez", "99887766", "Psicología");
+        Estudiante e7 = new Estudiante("Pedro Ramirez", "66778899", "Economía");
+        // Genera estudiantes con nombres similares pero distintos dnis y carreras para probar el metodo buscarNombre
+        Estudiante e8 = new Estudiante("Juan Gomez", "12349876", "Ingeniería de Sistemas");
+        Estudiante e9 = new Estudiante("Maria Perez", "87651234", "Administración");
+        Estudiante e10 = new Estudiante("Carlos Rodriguez", "11224433", "Derecho");
+
 
         e1.agregarNota(10.50);
         e1.agregarNota(15.00);
@@ -42,6 +48,11 @@ public class MenuRegistro {
         registroEstudiantes.registrarEstudiante(e4);
         registroEstudiantes.registrarEstudiante(e5);
         registroEstudiantes.registrarEstudiante(e6);
+        registroEstudiantes.registrarEstudiante(e7);
+        registroEstudiantes.registrarEstudiante(e8);
+        registroEstudiantes.registrarEstudiante(e9);
+        registroEstudiantes.registrarEstudiante(e10);
+
 
         int command;
 
