@@ -58,8 +58,9 @@ public class MenuRegistro {
 
         do {
             printMenu();
-            System.out.print("Seleccione una opción: ");
-            command = Integer.parseInt(scanner.nextLine());
+
+            command = leerOpcion();
+
             switch (command) {
                 case 1 -> registrarNuevo();
                 case 2 -> agregarNota();
@@ -77,16 +78,29 @@ public class MenuRegistro {
 
     }
 
+    private int leerOpcion() {
+        while (true){
+            System.out.print("Seleccione una opción: ");
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e){
+                System.out.println("Error: Ingresa una opción valida");
+            }
+        }
+    }
+
     public void registrarNuevo() {
-
-        System.out.println("Ingresa nombre: ");
-        String nombre = scanner.nextLine();
-        System.out.println("Ingresa DNI: ");
-        String dni = scanner.nextLine();
-        System.out.println("Ingresa Carrera: ");
-        String carrera = scanner.nextLine();
-
-        registroEstudiantes.registrarEstudiante(new Estudiante(nombre, dni, carrera));
+        try {
+            System.out.println("Ingresa nombre: ");
+            String nombre = scanner.nextLine();
+            System.out.println("Ingresa DNI: ");
+            String dni = scanner.nextLine();
+            System.out.println("Ingresa Carrera: ");
+            String carrera = scanner.nextLine();
+            registroEstudiantes.registrarEstudiante(new Estudiante(nombre, dni, carrera));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error al registrar");
+        }
     }
 
     private void listarPorPromedio(){
@@ -128,7 +142,7 @@ public class MenuRegistro {
 
         try {
             System.out.print("Ingrese la nota: ");
-            double nota = Integer.parseInt(scanner.nextLine());
+            double nota = Double.parseDouble(scanner.nextLine());
             estudiante.get().agregarNota(nota);
             System.out.println("Nota agregada correctamente");
         } catch (NumberFormatException e) {

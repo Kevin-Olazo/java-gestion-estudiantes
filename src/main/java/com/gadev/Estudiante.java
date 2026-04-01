@@ -52,6 +52,7 @@ public class Estudiante extends Persona implements Comparable<Estudiante> {
     @Override
     public String toString() {
         return super.toString() +
+                " | Carrera: " + carrera +
                 " | Promedio: " + String.format("%.2f", getPromedio()) +
                 " | Notas: " + notas;
     }
