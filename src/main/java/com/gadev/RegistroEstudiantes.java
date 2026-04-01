@@ -12,7 +12,7 @@ public class RegistroEstudiantes {
             throw new IllegalArgumentException("Estudiante no puede ser null");
         }
 
-        if (porDni.containsKey(estudiante.getDni())){
+        if (porDni.containsKey(estudiante.getDni())) {
             throw new IllegalArgumentException("Ya existe un estudiante con DNI: " + estudiante.getDni());
         }
 
@@ -25,7 +25,7 @@ public class RegistroEstudiantes {
         validarString(dni, "Dni");
 
         Estudiante e = porDni.remove(dni);
-        if (e != null){
+        if (e != null) {
             lista.remove(e);
         }
     }
@@ -47,8 +47,6 @@ public class RegistroEstudiantes {
                 .filter(e -> e.getNombre() != null &&
                         e.getNombre().toLowerCase().contains(busqueda))
                 .collect(Collectors.toList());
-
-
     }
 
     public List<Estudiante> listarPorPromedio() {
@@ -60,6 +58,27 @@ public class RegistroEstudiantes {
     }
 
     public void estadisticas() {
+        if (lista.isEmpty()) {
+            System.out.println("No hay estudiantes registrados.");
+            return;
+        }
+
+        // 1. Promedio general
+        double promedioGeneral = lista.stream()
+                .mapToDouble(Estudiante::getPromedio)
+                .average()
+                .orElse(0.0);
+
+        // 2. Estudiante con el mejor promedio
+        Estudiante mejorPromedio = lista.stream()
+                .max(Comparator.comparingDouble(Estudiante::getPromedio))
+                .orElse(null);
+
+        // 3. Cantidad de aprobados (usando filter y count)
+        long aprobados = lista.stream()
+                .filter(e -> e.getPromedio() >= 13)
+                .count();
+
         System.out.println("Promedio general: ");
         System.out.println("Estudiante con mejor promedio: ");
         System.out.println("Cantidad de aprobados: ");
