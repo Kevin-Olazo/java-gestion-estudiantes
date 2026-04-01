@@ -94,10 +94,6 @@ public class RegistroEstudiantes {
         return List.copyOf(lista);
     }
 
-    public void setLista(List<Estudiante> lista) {
-        this.lista = lista;
-    }
-
     // Metodo auxiliar para validar String como DNI o Nombre
     private void validarString(String valor, String nombreCampo) {
         if (valor == null || valor.isBlank()) {
