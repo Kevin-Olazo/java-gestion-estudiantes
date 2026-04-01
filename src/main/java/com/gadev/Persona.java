@@ -15,7 +15,7 @@ public abstract class Persona {
         this.dni = dni;
     }
 
-    abstract String getTipoPersona();
+    public abstract String getTipoPersona();
 
     public String getNombre() {
         return nombre;
@@ -27,10 +27,6 @@ public abstract class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" +
-                "nombre='" + nombre + '\'' +
-                ", dni='" + dni + '\'' +
-                getTipoPersona() +
-                '}';
+        return "[" + getTipoPersona() + "] " + nombre + " (DNI: " + dni + ")";
     }
 }
