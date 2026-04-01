@@ -6,10 +6,13 @@ public abstract class Persona {
 
     public Persona(String nombre, String dni) {
         if (nombre == null || nombre.isBlank()) {
-            throw new IllegalArgumentException("Nombre no puede ser nulo o vacío");
+            throw new IllegalArgumentException("El campo nombre no puede estar vacío");
         }
         if (dni == null || dni.isBlank()) {
-            throw new IllegalArgumentException("DNI no puede ser nulo o vacío");
+            throw new IllegalArgumentException("El campo DNI no puede estar vacío");
+        }
+        if (!dni.matches("\\d{8}")) {
+            throw new IllegalArgumentException("DNI debe tener exactamente 8 dígitos numéricos");
         }
         this.nombre = nombre;
         this.dni = dni;

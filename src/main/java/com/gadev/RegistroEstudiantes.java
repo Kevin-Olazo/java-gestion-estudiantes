@@ -7,7 +7,7 @@ public class RegistroEstudiantes {
     private List<Estudiante> lista;
     private Map<String, Estudiante> porDni;
 
-    public RegistroEstudiantes(){
+    public RegistroEstudiantes() {
         this.lista = new ArrayList<>();
         this.porDni = new HashMap<>();
     }
@@ -49,15 +49,13 @@ public class RegistroEstudiantes {
         String busqueda = nombre.trim().toLowerCase();
 
         return lista.stream()
-                .filter(e -> e.getNombre() != null &&
+                .filter(e ->
                         e.getNombre().toLowerCase().contains(busqueda))
                 .collect(Collectors.toList());
     }
 
     public List<Estudiante> listarPorPromedio() {
-        List<Estudiante> listaPromedios = List.copyOf(lista);
-
-        return listaPromedios.stream()
+        return lista.stream()
                 .sorted()
                 .collect(Collectors.toList());
     }
