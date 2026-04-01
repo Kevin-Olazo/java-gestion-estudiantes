@@ -17,6 +17,25 @@ public class MenuRegistro {
         Estudiante e5 = new Estudiante("Luis Fernandez", "55667788", "Arquitectura");
         Estudiante e6 = new Estudiante("Sofia Martinez", "99887766", "Psicología");
 
+        e1.agregarNota(10.50);
+        e1.agregarNota(15.00);
+        e1.agregarNota(20.00);
+        e2.agregarNota(12.00);
+        e2.agregarNota(14.50);
+        e2.agregarNota(19.00);
+        e3.agregarNota(18.00);
+        e3.agregarNota(17.00);
+        e3.agregarNota(16.50);
+        e4.agregarNota(9.00);
+        e4.agregarNota(11.00);
+        e4.agregarNota(13.50);
+        e5.agregarNota(16.00);
+        e5.agregarNota(17.50);
+        e5.agregarNota(18.00);
+        e6.agregarNota(13.00);
+        e6.agregarNota(14.00);
+        e6.agregarNota(15.50);
+
         registroEstudiantes.registrarEstudiante(e1);
         registroEstudiantes.registrarEstudiante(e2);
         registroEstudiantes.registrarEstudiante(e3);
@@ -36,6 +55,7 @@ public class MenuRegistro {
                 case 3 ->
                         buscarEstudiante().ifPresentOrElse(e -> System.out.println(e.toString()), () -> System.out.println("No se encontró  estudiante con ese dni"));
                 case 4 -> buscarNombre();
+                case 5 -> listarPorPromedio();
                 case 6 -> verEstadisticas();
                 case 8 -> System.out.println("Adios!");
                 default -> System.out.println("Ingrese un comando valido");
@@ -57,7 +77,19 @@ public class MenuRegistro {
         registroEstudiantes.registrarEstudiante(new Estudiante(nombre, dni, carrera));
     }
 
-    public void buscarNombre(){
+    private void listarPorPromedio(){
+        List<Estudiante> listaPromedio = registroEstudiantes.listarPorPromedio();
+
+        if (listaPromedio.isEmpty()){
+            System.out.println("No hay estudiantes registrados.");
+        } else {
+            for(Estudiante e : listaPromedio){
+                System.out.println(e.toString());
+            }
+        }
+    }
+
+    private void buscarNombre(){
         System.out.print("Ingrese nombre: ");
         String nombre = scanner.nextLine();
         List<Estudiante> resultado = registroEstudiantes.buscarPorNombre(nombre);
@@ -73,7 +105,7 @@ public class MenuRegistro {
 
     }
 
-    public void agregarNota() {
+    private void agregarNota() {
         Optional<Estudiante> estudiante = buscarEstudiante();
 
         if (estudiante.isEmpty()) {
@@ -96,25 +128,25 @@ public class MenuRegistro {
 
     }
 
-    public Optional<Estudiante> buscarEstudiante() {
+    private Optional<Estudiante> buscarEstudiante() {
         System.out.print("Ingrese dni del estudiante: ");
         String dni = scanner.nextLine();
         return registroEstudiantes.buscarPorDni(dni);
     }
 
-    public void verEstadisticas() {
+    private void verEstadisticas() {
         for (Estudiante e : registroEstudiantes.getLista()) {
             System.out.println(e.toString());
         }
     }
 
-    public void printMenu() {
+    private void printMenu() {
         System.out.println("------- Menu de registro de estudiantes --------");
         System.out.println("1. Registrar nuevo estudiante");
         System.out.println("2. Agregar nota a estudiante");
         System.out.println("3. Buscar por DNI");
         System.out.println("4. Buscar por nombre");
-        System.out.println("5. Listar todos los promedios");
+        System.out.println("5. Listar todos por promedio");
         System.out.println("6. Ver estadísticas");
         System.out.println("7. Eliminar estudiante");
         System.out.println("8. Salir");
